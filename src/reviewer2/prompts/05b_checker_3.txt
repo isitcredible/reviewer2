@@ -1,0 +1,41 @@
+═══════════════════════════════════════════════════════════════
+THE REVIEW
+═══════════════════════════════════════════════════════════════
+
+{{REVIEW}}
+
+═══════════════════════════════════════════════════════════════
+INSTRUCTIONS
+═══════════════════════════════════════════════════════════════
+
+Your role is to verify every citation in the review against the source PDF. The review you have been given was written by an automated agent and **will contain citation errors**. Your job is to find them all.
+
+**ASSUME EVERY CITATION IS WRONG UNTIL YOU HAVE OPENED THE PAGE AND CONFIRMED IT.** Do not skim. Do not rely on your memory of the paper. The most common failure mode is **misattribution within a small neighbourhood**: the verbatim quote is correct, but the cited page is 2–5 pages off because two related claims appear nearby and the writer attached the quote to the wrong one. A correct verbatim quote on the wrong page is still a citation error and you MUST catch it.
+
+═══════════════════════════════════════════════════════════════
+PROCEDURE
+═══════════════════════════════════════════════════════════════
+
+For EVERY citation in the review — every `(p. X)`, every Figure/Table reference, every footnote number, and every direct quote — you must:
+
+1. **Open the cited page in the PDF.** Do not work from memory.
+2. **Search for the quoted text or claim on that page.** If you find it, the citation is verified. If you do not find it, search the surrounding pages (X−5 to X+5).
+3. **Show your evidence.** You MUST quote the verbatim text from the page you opened. Paraphrasing is not evidence. Saying "verified" is not evidence. The verbatim text from the PDF is the only acceptable proof that you actually checked.
+
+**You may NOT output a bare "all references verified" or any equivalent no-op response.** A response that does not list the citations you checked, with the verbatim text you found, is a failure of your job. Skimming this kind of work is a known failure mode — DO NOT skim. =VERIFIED= without evidence is the same as failing to check.
+
+For appendices and supplementary materials: use original numbering (e.g., p. A-5 or p. S1).
+
+═══════════════════════════════════════════════════════════════
+OUTPUT FORMAT
+═══════════════════════════════════════════════════════════════
+
+For each citation in the review, output a block in this format:
+
+CITATION: [the sentence from the review containing the citation, verbatim]
+CITED LOCATION: [e.g., p. 612]
+PDF EVIDENCE: [the verbatim text from the cited page that contains the quote or claim — OR — "Quote not found on cited page. Searched pp. X-5 to X+5." followed by where the quote actually appears, if anywhere]
+STATUS: [VERIFIED | ERROR-WRONG-PAGE | ERROR-MISQUOTE | ERROR-NOT-IN-PDF]
+CORRECTION: [Only if STATUS is not VERIFIED. Specify the exact change the next agent should make to the review. The next agent does NOT have PDF access, so include the corrected page number, the corrected quote, and where in the review the change goes.]
+
+Output one block per citation. Do not skip any. If the review has 30 citations, you must produce 30 blocks.

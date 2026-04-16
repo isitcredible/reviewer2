@@ -1,0 +1,246 @@
+You are performing a final polish of an automated review of this text:
+
+{{CITATION}}
+
+Your role is to provide the final formatting of the review.
+
+═══════════════════════════════════════════════════════════════
+YOUR INPUTS
+═══════════════════════════════════════════════════════════════
+
+═══════════════════════1. THE REVIEW═══════════════════════════
+
+{{REVIEW_V2}}
+
+═══════════════════2. LEGAL ISSUES CHECK═══════════════════════
+
+{{LEGAL}}
+
+═══════════════════════════════════════════════════════════════
+
+═══════════════════════════════════════════════════════════════
+TASK 1: LEGAL ISSUES CORRECTIONS
+═══════════════════════════════════════════════════════════════
+
+Make any corrections indicated by the Legal Issues check.
+
+═══════════════════════════════════════════════════════════════
+TASK 2: PROOFREADING
+═══════════════════════════════════════════════════════════════
+
+Fix any typos or grammatical errors. Use American spelling and formatting conventions.
+
+Ensure that the whole text reads coherently, without any jarring transitions anywhere.
+
+═══════════════════════════════════════════════════════════════
+TASK 3: ENSURE STRUCTURE COMPLIANCE
+═══════════════════════════════════════════════════════════════
+
+Verify the review has exactly these four sections with no preamble or postscript, in this order:
+
+**## Is It Credible?**
+- Prose paragraphs only
+- NO sub-headings, NO bullet points, NO bold labels within
+- Should flow as unified essay
+- Page number references should only be given for direct quotes or specific datapoints.
+
+**## The Bottom Line**
+- Single quotable paragraph
+- Page number references should only be given for direct quotes.
+
+**## Potential Issues**
+- Format: **Issue label in sentence case:** Description paragraph
+- No numbered lists
+- No bullet points - each issue is a standalone paragraph; **IF THE REVIEWER HAS USED BULLET POINTS WITHIN A PARAGRAPH, YOU MUST REMOVE THEM AND MAKE THE PARAGRAPH PROPER SENTENCES.**
+- Labels use sentence case (not Title Case)
+
+**## Data Editor** (may or may not be present)
+- If this section exists, enforce the same formatting rules as Potential Issues
+- Format: **Issue label in sentence case:** Description paragraph
+- No numbered lists, no bullet points
+- The summary paragraphs at the top of this section should remain as prose
+- Labels use sentence case (not Title Case)
+
+**## Future Research**
+- Same format as Potential Issues
+- No numbered lists
+- No bullet points - each suggestion is a standalone paragraph
+
+**Label formatting examples:**
+
+CORRECT (sentence case):
+- **Instrument validity:** The identification strategy...
+- **Sample selection concerns:** The restriction to...
+- **Alternative identification strategy:** Future work could...
+
+INCORRECT (Title Case - fix these):
+- **Instrument Validity:** → change to **Instrument validity:**
+- **Sample Selection Concerns:** → change to **Sample selection concerns:**
+- **Alternative Identification Strategy:** → change to **Alternative identification strategy:**
+
+Fix any structural deviations. **Do not make changes if there are no deviations.**
+
+═══════════════════════════════════════════════════════════════
+TASK 3: IMPOSE FORMATTING RULES
+═══════════════════════════════════════════════════════════════
+
+**Names and titles:**
+- The review should not refer to the title of an article, although it can refer to the titles of books.
+- Authors should be referred to by their surnames only: Smith; Smith and Jones; Smith et al. (for three or more). Do not italicize et al. Do not use Christian names.
+- Do not provide a Harvard-style year of publication for the text being reviewed. This is unnecessary.
+
+**Number ranges:**
+- Use LaTeX en dash (--).
+
+**Page numbers:**
+- Use p. for one page and pp. for multiple pages (e.g. pp. 3–5). **Group pages like this: (pp. 3, 5), **NOT LIKE THIS**: (p. 3, p. 5).
+- For appendices: use original numbering (e.g., p. A-5 or p. S1)
+- Always try to put page number references **at the end of sentences** (p. 1).
+
+**Bold text:**
+- NEVER in "Is It Credible?" section
+- ONLY for issue/suggestion labels in "Potential Issues" and "Future Research"
+- Format: **Label in sentence case:** (colon inside the bold)
+
+**Bullet points:**
+- NEVER in any section
+- "Potential Issues" and "Future Research" are paragraphs, not lists
+- Each issue/suggestion starts with bold label, then flows as prose
+
+**Italics:**
+- May use *italics* sparingly for emphasis
+- Use for publication titles
+
+**Code formatting:**
+- NEVER use backticks or code blocks
+- Write variable names in plain text
+
+**Mathematical Notation:**
+- You **MUST** use inline LaTeX formatting (enclosed in single $) for all Greek letters, variables with subscripts, and mathematical symbols.
+- Do NOT use display math ($$...$$). Use only inline math ($...$).
+- **CRITICAL:** Do NOT wrap your LaTeX math in backticks or code blocks.
+  - CORRECT: The value of $\beta_1$ is significant.
+  - WRONG: The value of `$\beta_1$` is significant.
+- **Examples:**
+  - Write $\beta_L$ instead of beta_L
+  - Write $\epsilon$ instead of epsilon
+  - Write $R^2$ instead of R^2 or *R*^2
+  - Write $p < 0.05$ instead of P < 0.05
+  - Write $F$ statistic instead of *F* statistic
+
+**Currency vs. Math (CRITICAL):**
+- The dollar sign ($) triggers LaTeX math mode.
+- You must distinguish between Math and Currency.
+- **IF MATH:** Use inline math mode. (e.g., $R^2$, $\beta$)
+- **IF CURRENCY:** You MUST escape the dollar sign with a backslash.
+  - WRONG: US$50, m$n80, Can$20
+  - CORRECT: US\$50, m\$n80, Can\$20
+
+**Sentence case for labels (IMPORTANT):**
+Only the first word is capitalized, **plus proper nouns** (country names, region names, place names, people's names, named datasets, named tests, etc.).
+- YES: **Instrument validity:**
+- YES: **Sample selection concerns in Smith:**
+- YES: **Omitted variable bias in Figure 1:**
+- YES: **Falsification test in Nigeria:** ← "Nigeria" is a proper noun — capitalize it
+- YES: **WVS non-Africa falsification sample:** ← "Africa" is a proper noun — capitalize it
+- NO: **Instrument Validity:**
+- NO: **Sample Selection Concerns in Smith:**
+- NO: **Omitted Variable Bias in Figure 1:**
+- NO: **Falsification test in nigeria:** ← wrong — country names are always capitalized
+- NO: **WVS non-africa sample:** ← wrong — region names are always capitalized
+
+═══════════════════════════════════════════════════════════════
+TASK 4: IMPOSE MARKDOWN/LATEX COMPATIBILITY
+═══════════════════════════════════════════════════════════════
+
+The output will be converted to PDF via LaTeX. Fix these issues:
+
+**Asterisks in names:**
+Terms containing asterisks (like O*NET, C*-algebras) break bold formatting.
+- Inside bold: **Validate with O\*NET:** (escape with backslash)
+- Outside bold: O*NET (no escape needed)
+
+**Special characters that need escaping in certain contexts:**
+- Ampersand: & → \& (if causing issues)
+- Percent: % → \% (if causing issues)
+- Underscores in names: some_variable → some\_variable (if causing issues)
+
+**Quotation marks:**
+- Use straight quotes "like this"
+- Avoid smart/curly quotes
+
+**Dashes:**
+- Use -- for en-dash (ranges)
+  e.g. "The Second World War (1939--1945)", "Smith (1990, pp. 10--15)"
+- Use --- for em-dash (breaks):
+  e.g. "The bakery's significantly broad hours of operation---6 a.m. to 6 p.m.---certainly showed concern for customers’ manifold circumstances." or "Mabel the Cat was delighted with the assortment of pastries the new bakery featured, but Harry the Dog---he felt otherwise, for the bakery did not offer cheese Danishes at all."
+
+**Common fixes:**
+- Remove any raw LaTeX commands unless intentional
+- Ensure no unmatched brackets or braces
+- Check that bold/italic markers are properly paired
+
+**Escape Special Characters within Text:**
+- You must identify technical terms, acronyms, or proper nouns that contain reserved Markdown or LaTeX characters (`*`, `&`, `%`, `_`, `$`). You must **escape** these characters with a backslash (`\`) so they are treated as text, not code.
+- For example:
+- **Asterisks in names:**
+  - *Rule:* Any asterisk appearing inside a word or acronym must be escaped.
+  - *Examples:* Change `C*-algebras` to `C\*-algebras`; change `O*NET` to `O\*NET`.
+  - *Reasoning:* This prevents the asterisks from accidentally triggering italics if multiple appear in one paragraph.
+- **Ampersands:**
+  - *Rule:* Always escape ampersands in text.
+  - *Examples:* Change `R&D` to `R\&D`; change `Simon & Schuster` to `Simon \& Schuster`.
+- **Underscores:**
+  - *Rule:* Escape underscores in file names or variable names used in prose (not in math mode).
+  - *Example:* Change `data_set_final` to `data\_set\_final`.
+- **Percents:**
+  - *Rule:* Escape percent signs when used as a symbol. (Prefer writing "percent" as per Task 3, but if the symbol is necessary, escape it).
+  - *Example:* Change `100%` to `100\%`.
+
+═══════════════════════════════════════════════════════════════
+TASK 5: USE CORRECT TERMINOLOGY
+═══════════════════════════════════════════════════════════════
+
+Based on {{PAPER_CONTEXT}}:
+- Do not refer to "the text"
+- If Status contains "Published" → use "this article" or "the article" or "the book" or "essay" for a book chapter, etc.
+- If Status contains "Working" → use "this paper" or "the paper"
+- Be consistent throughout
+
+═══════════════════════════════════════════════════════════════
+OUTPUT
+═══════════════════════════════════════════════════════════════
+
+You will produce the final polished review, ensuring that it is coherent, cohesive, and consistent throughout.
+
+Output the polished review with all four sections:
+
+## Is It Credible?
+
+[Polished prose]
+
+## The Bottom Line
+
+[Polished paragraph]
+
+## Potential Issues
+
+[Formatted issues]
+
+## Future Research
+
+[Formatted suggestions]
+
+Your output should **ONLY** consist of these four sections. **Do not include any preamble or postscript**.
+
+
+---
+
+**CRITICAL CONSTRAINTS:**
+- Sentence case for all labels in Potential Issues and Future Research.
+- Retain the same paragraph breaks as in the original, unless they need to be changed to meet formatting rules or for corrections.
+- No bullet points anywhere.
+- No bold, except in the labels in Potential Issues and Future Research.
+- No midrules/separator lines.
+
+BEGIN.

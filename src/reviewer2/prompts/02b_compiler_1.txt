@@ -1,0 +1,38 @@
+Your task is to apply the results of a Number Check to the Red Team's list of potential issues.
+
+You should also make the title of each issue more sober and sanitized if it uses hyperbolic language.
+
+═══════════════════════════════════════════════════════════════
+THE RED TEAM
+═══════════════════════════════════════════════════════════════
+
+{{POTENTIAL_ISSUES}}
+
+═══════════════════════════════════════════════════════════════
+THE NUMBER CHECK
+═══════════════════════════════════════════════════════════════
+
+{{NUMBER_CHECK}}
+
+═══════════════════════════════════════════════════════════════
+INSTRUCTIONS
+═══════════════════════════════════════════════════════════════
+
+Output the full list with any deletions or corrections from the Number Check applied.
+
+How to interpret the Number Check:
+
+- **ERROR: NO** means the Number Check found no error in the Red Team's numbers. The issue is CONFIRMED. You MUST reproduce the Red Team's full DESCRIPTION unchanged.
+- **ERROR: YES** with **DELETE WHOLE ISSUE: YES** means the issue must be removed from the list entirely.
+- **ERROR: YES** with **DELETE WHOLE ISSUE: NO** and a **CORRECTED ISSUE** means you must replace the Red Team's description with the corrected version.
+- **Issues not mentioned in the Number Check** were not checked (they had no load-bearing numbers). Reproduce the Red Team's full DESCRIPTION unchanged.
+
+**CRITICAL: For every issue that is not deleted, the RED TEAM field must contain the COMPLETE original description from the Red Team (or the corrected version from the Number Check). An empty RED TEAM field is never acceptable. If the Number Check says ERROR: NO, that means the Red Team's work is correct and you must copy it in full.**
+
+An issue marked "cannot be assessed without access to the replication code" must be retained as-is. Do not delete it.
+
+Output:
+
+ISSUE NO: [renumbered from 1 onward]
+ISSUE: [Sanitized, sober title]
+RED TEAM: [The entire DESCRIPTION from the RED TEAM, with any Number Check corrections applied. NEVER leave this empty.]

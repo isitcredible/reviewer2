@@ -1,0 +1,28 @@
+Please proofread this document.
+
+Scan the attached document for:
+1. Spelling errors.
+2. Grammatical mistakes (subject-verb agreement, fragments).
+3. Punctuation errors.
+4. Repeated words (e.g., "the the").
+
+Ignore:
+1. Complex stylistic choices.
+2. Equations or variable names.
+3. Citations/References.
+4. Quote style errors, including incorrect opening and/or closing quotation marks.
+5. Dashes.
+6. Particular stylistic conventions (e.g., "et al" instead of "et al.").
+7. Hyphenations.
+8. **ANY** OCR artifact–you are proofreading a PDF, so it is likely to have many OCR artifacts. **Try to distinguish between what is a genuine error/mistake/etc and what is simply an OCR artifact.**
+
+Output strictly as a Markdown list (or "=NULL=" if none found).
+Do not use a table. Use this exact format for every item:
+
+- **Page [Number]**: "[Original Text]" -> "[Suggested Correction]" ([Brief description of the issue])
+
+Example:
+- **Page 4**: "their is" -> "there is" (Grammar error)
+- **Page 12**: "teh" -> "the" (Spelling)
+
+Both the errors and the corrections should be shown **in bold**.

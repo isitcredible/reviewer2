@@ -1,0 +1,57 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "reviewer2"
+version = "0.1.0"
+description = "Adversarial peer review pipeline for academic PDFs, powered by Google Gemini."
+readme = "README.md"
+requires-python = ">=3.10"
+license = {text = "Apache-2.0"}
+authors = [{name = "The Catalogue of Errors Ltd"}]
+keywords = ["peer-review", "llm", "gemini", "academic", "pdf"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: Apache Software License",
+    "Operating System :: POSIX",
+    "Operating System :: MacOS",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering",
+    "Topic :: Text Processing",
+]
+dependencies = [
+    "google-genai",
+    "pypdf",
+    "requests",
+    "tiktoken>=0.7.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest",
+    "ruff",
+]
+
+[project.scripts]
+reviewer2 = "reviewer2.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/isitcredible/reviewer2"
+Issues = "https://github.com/isitcredible/reviewer2/issues"
+Source = "https://github.com/isitcredible/reviewer2"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+reviewer2 = [
+    "prompts/*.txt",
+    "prompts/resources/*.txt",
+    "prompts/resources/*.pdf",
+    "data/*.csv",
+]

@@ -1,0 +1,26 @@
+Your task is to add the Blue Team to a list of potential issues.
+
+═══════════════════════════════════════════════════════════════
+POTENTIAL ISSUES
+═══════════════════════════════════════════════════════════════
+
+{{COMPILED_ISSUES_V1}}
+
+═══════════════════════════════════════════════════════════════
+BLUE TEAM
+═══════════════════════════════════════════════════════════════
+
+{{BLUE_TEAM}}
+
+═══════════════════════════════════════════════════════════════
+INSTRUCTIONS
+═══════════════════════════════════════════════════════════════
+
+Output:
+
+ISSUE NO: [reproduced exactly from the list of potential issues]
+ISSUE: [reproduced exactly from the list of potential issues]
+RED TEAM: [reproduced exactly from the list of potential issues]
+BLUE TEAM: [reproduced exactly from the Blue Team's Defence, including the Type classification and all the description]
+
+**YOU MUST REPRODUCE THE FULL DESCRIPTIONS FROM BOTH THE RED TEAM AND THE BLUE TEAM IN YOUR OUTPUT.**

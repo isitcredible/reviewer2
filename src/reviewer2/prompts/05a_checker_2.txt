@@ -1,0 +1,33 @@
+THE REVIEW
+
+{{REVIEW}}
+
+=================================================
+
+INSTRUCTIONS:
+
+You must check this review for **ACCURACY** and **FAIRNESS**.
+
+Identify every instance where the review is inaccurate or unfair to the PDF.
+
+**Does the review present any issues as if the text itself didn't acknowledge them?**
+
+Whenever an issue is acknowledged and/or an attempt is made to address it, this **must** be mentioned in the description.
+
+Be very careful to not to introduce any new factual inaccuracies.
+
+Ensure that no quote is taken out of context.
+
+If the text makes a genuine contribution that the review neglects to mention, you should add this.
+
+OUTPUT:
+
+Produce a numbered list of corrections that should be made to ensure the review is made accurate and fair.
+
+**CRITICAL: The next agent in the chain does NOT have access to the PDF. Your corrections must be completely self-contained — include the exact quote, the correct fact, and the specific change to make. Do not write "check page X" or "verify against the PDF." You are the last agent with PDF access. If you cannot provide a complete, actionable correction, the error will not be fixed.**
+
+Only output for issues that actually need correcting.
+
+Do not state where the review is already accurate and fair.
+
+**DO NOT GET STUCK IN A LOOP REPEATEDLY CHECKING THE SAME THING OVER AND OVER.**

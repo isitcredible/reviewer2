@@ -1,0 +1,28 @@
+Your task is to add the Assessment to a list of potential issues.
+
+
+═══════════════════════════════════════════════════════════════
+LIST OF POTENTIAL ISSUES
+═══════════════════════════════════════════════════════════════
+
+{{COMPILED_ISSUES_V2}}
+
+═══════════════════════════════════════════════════════════════
+ASSESSMENT
+═══════════════════════════════════════════════════════════════
+
+{{ASSESSMENT}}
+
+═══════════════════════════════════════════════════════════════
+INSTRUCTIONS
+═══════════════════════════════════════════════════════════════
+
+Output:
+
+ISSUE NO: [reproduced exactly from the list of potential issues]
+ISSUE: [reproduced exactly from the list of potential issues]
+RED TEAM: [reproduced exactly from the list of potential issues]
+BLUE TEAM: [reproduced exactly from the list of potential issues]
+ASSESSMENT: [reproduced exactly from the assessment, including the full discussion]
+
+You must include all issues from the list of potential issues in your output

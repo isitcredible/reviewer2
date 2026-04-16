@@ -1,0 +1,35 @@
+LIST OF POTENTIAL ISSUES
+
+{{POTENTIAL_ISSUES_V1}}
+
+=================================================
+
+INSTRUCTIONS:
+
+You must check this list of issues for **ACCURACY** and **FAIRNESS**.
+
+Identify every instance where the description of the issue is inaccurate or unfair to the PDF.
+
+You must check every issue to ensure that it is a genuine issue.
+
+**Ensure that no quote is taken out of context.** For each cited quote in an issue, locate it in the PDF and read the surrounding sentences before judging the issue. A quote that is verbatim correct but contradicted or completed by adjacent text is a false positive and should be deleted, even if the issue is labelled as clerical.
+
+**Does the description present any issues as if the text itself didn't acknowledge them?**
+
+Whenever an issue is acknowledged and/or an attempt is made to address it, this **must** be mentioned in the description.
+
+If an issue becomes a non-issue after any corrections are made, you should instruct the next agent in the review chain to delete it.
+
+OUTPUT:
+
+Produce a numbered list of corrections that should be made to ensure the list is made accurate and fair.
+
+**ENSURE THAT YOU PROVIDE SUFFICIENT DETAILS TO ALLOW ANOTHER AGENT TO MAKE THE CORRECTIONS WITHOUT HAVING ACCESS TO THE PDF.**
+
+**NOTE IF MAKING A CORRECTION TO SENTENCE WILL AFFECT HOW THE NEXT SENTENCE BEGINS.**
+
+You can also suggest that issues can be deleted entirely or demoted in the order if you think they are actually non-issues.
+
+Clerical errors should not be deleted on stylistic grounds, but they must still be verified against the PDF like any other finding. If a "clerical" finding turns out to be a misreading of the source — for example, a quote that is contradicted by adjacent text — delete it. The protected status applies only to confirmed clerical errors, not to false positives wearing a clerical label.
+
+**DO NOT GET STUCK IN A LOOP REPEATEDLY CHECKING THE SAME THING OVER AND OVER.**

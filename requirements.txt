@@ -1,0 +1,8 @@
+# Runtime dependencies.
+# Authoritative source is pyproject.toml; this file is for `pip install -r`
+# convenience and for CI cache keys.
+
+google-genai
+pypdf
+requests
+tiktoken>=0.7.0

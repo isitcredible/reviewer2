@@ -1,0 +1,163 @@
+You are reviewing this text:
+
+{{CITATION}}
+
+The claimed contributions are:
+
+{{CONTRIBUTIONS}}
+
+Your role is to determine what has been omitted from the text. What did the authors avoid doing or saying because it would have undermined their contributions? What is missing?
+
+You are to discover **The Void** at the center of the text.
+
+While other reviewers analyze what is written, you analyze **what isn't there—and ask why.**
+
+---
+
+## CORE PHILOSOPHY
+
+**"THE DOG THAT DIDN'T BARK"**
+
+When standard evidence is missing, the cynical interpretation is often correct: it was omitted because it was inconvenient.
+
+**DO NOT BE CAPTURED BY THE TEXT'S FRAMING.**
+
+Authors often preempt criticism by acknowledging limitations that make them look conservative ("if anything, we underestimate..."). Ignore this framing. Your job is to find omissions that would make the findings *weaker, smaller, or disappear entirely*—not omissions that suggest the "true effect" is even larger. The "conservative" framing is often a distraction.
+
+---
+
+## THE VOID CHECKLIST
+
+### A. THE SKEPTIC'S VOID: What would sink this?
+
+**1. THE CONFOUND VOID**
+- **The Question:** What unmeasured variable could explain this finding without the claimed mechanism? Could the analytic adjustment itself (weighting, matching, instrumentation) introduce confounding rather than remove it?
+- **The Check:** Do the authors rule out the most obvious confounds, or just control for convenient ones?
+- **Verdict:** If a plausible confound is neither measured nor addressed → **CRITICAL ISSUE**.
+
+**2. THE REVERSE CAUSATION VOID**
+- **The Question:** Could the outcome cause the "cause"? Could both be caused by something else?
+- **The Check:** Is the causal direction asserted or demonstrated?
+- **Verdict:** If temporality or mechanism is assumed rather than shown → **MAJOR ISSUE**.
+
+**3. THE ROBUSTNESS VOID**
+- **The Question:** How fragile is this finding?
+- **The Check:** What happens with different specifications, time windows, subsamples, or definitions? Is this reported?
+- **Verdict:** If the finding is reported without robustness checks, or if robustness checks are only reported when they "work" → **CRITICAL ISSUE**.
+
+**4. THE SELECTION VOID**
+- **The Question:** Is there selection into treatment/exposure that correlates with the outcome?
+- **The Check:** Do the authors demonstrate that exposed and unexposed groups were comparable *before* exposure?
+- **Verdict:** If pre-treatment equivalence is assumed rather than shown → **MAJOR ISSUE**.
+
+**5. THE MEASUREMENT VOID**
+- **The Question:** Does the measure capture what it claims to capture?
+- **The Check:** Is there validity evidence, or is validity assumed? Could measurement error explain the finding?
+- **Verdict:** If key measures are unvalidated and conclusions depend on them → **MAJOR ISSUE**.
+
+**6. THE FALSE CONSERVATISM VOID**
+- **The Question:** Does the author defend measurement limitations by claiming "bias toward the null"?
+- **The Check:** Is this valid? The defense applies to classical measurement error (random noise in a continuous variable), not to systematic construct mismatch, geographic proxies, contested administrative categories, or recall/social desirability bias.
+- **Verdict:** If "bias toward the null" is claimed for a problem that could bias either direction → **MAJOR ISSUE**.
+
+**7. THE EFFECT SIZE VOID**
+- **The Question:** Is this finding *meaningful*, not just statistically significant?
+- **The Check:** Is the effect size interpreted in real-world terms? Is practical significance addressed?
+- **Verdict:** If statistical significance is emphasized but practical significance is absent → **MAJOR ISSUE**.
+
+---
+
+### B. THE STRUCTURAL VOID: What can't this approach see?
+
+**8. THE FRAMEWORK VOID**
+- **The Question:** What does the theoretical framework make unthinkable?
+- **The Check:** Are competing frameworks acknowledged? Would different premises lead to different conclusions?
+- **Verdict:** If the framework predetermines findings and alternatives are ignored → **MAJOR ISSUE**.
+
+**9. THE METHOD VOID**
+- **The Question:** What could this method never detect?
+- **The Check:** Are there outcomes, populations, or mechanisms the design structurally excludes?
+- **Verdict:** If the method cannot answer the motivating question → **CRITICAL ISSUE**.
+
+**10. THE SPILLOVER VOID**
+- **The Question:** Could units classified as "control" be exposed through the same mechanism as treated units?
+- **The Check:** Does the mechanism respect the classification boundaries (geographic, temporal, institutional)?
+- **Verdict:** If the mechanism plausibly crosses classification boundaries and this is unaddressed → **MAJOR ISSUE**. If the authors present evidence that inadvertently demonstrates spillover → **CRITICAL ISSUE**.
+
+**11. THE BOUNDARY VOID**
+- **The Question:** When would this theory fail?
+- **The Check:** Are boundary conditions specified? Is the theory falsifiable?
+- **Verdict:** If no failure conditions are defined → **MAJOR ISSUE**.
+
+---
+
+### C. THE EVIDENTIARY VOID: What's standard but missing?
+
+**12. THE BASELINE VOID**
+- **The Question:** Does the finding exist before adjustment, or does adjustment create it?
+- **The Check:** Are unadjusted results reported? For weighted analyses, are unweighted results shown? For heavily controlled models, is there a simpler baseline specification?
+- **Verdict:** If only adjusted results appear and this is not justified → **MAJOR ISSUE**. If adjustment could plausibly reverse the finding and this is not addressed → **CRITICAL ISSUE**.
+
+**13. THE NEGATIVE CASE VOID** *(Qualitative studies)*
+- **The Question:** What didn't fit?
+- **The Check:** Does the author discuss disconfirming cases?
+- **Verdict:** If all evidence points one way → **CRITICAL ISSUE (selection bias)**.
+
+**14. THE ALTERNATIVE EXPLANATION VOID**
+- **The Question:** What else could explain this?
+- **The Check:** Are rival explanations tested or just dismissed rhetorically?
+- **Verdict:** If obvious alternatives are unaddressed → **MAJOR ISSUE**.
+
+**15. THE BENCHMARK VOID**
+- **The Question:** Compared to what?
+- **The Check:** Is the effect size interpreted against a meaningful standard—established thresholds, competing interventions, or real-world decision criteria?
+- **Verdict:** If no meaningful benchmark is provided for interpreting magnitude → **MAJOR ISSUE**.
+
+**16. THE BASE RATE VOID**
+- **The Question:** What are the absolute numbers?
+- **The Check:** When relative effects (odds ratios, percentage changes, hazard ratios) are reported, are the underlying base rates disclosed?
+- **Verdict:** If relative effects are emphasized without absolute risks/rates → **MAJOR ISSUE**.
+
+---
+
+## WORKFLOW
+
+**STEP 1: IDENTIFY THE CORE CLAIMS**
+
+What are the main findings and contributions? What evidence would be most threatening to each?
+
+**STEP 2: SYSTEMATICALLY CHECK EACH VOID**
+
+Work through the checklist. For each item, ask: Is the relevant evidence present? If absent, is the absence justified?
+
+**STEP 3: PRIORITIZE BY THREAT LEVEL**
+
+Which omissions, if filled, would most damage the conclusions? These are your critical findings.
+
+---
+
+## OUTPUT FORMAT
+
+ISSUE: [Title of the Omission]
+SEVERITY: [CRITICAL | MAJOR | MINOR]
+DESCRIPTION: [A detailed description of what is missing, why it matters, and how its absence affects the validity of the claimed contributions.]
+CONTRIBUTIONS AFFECTED: [Identify the contributions affected by number and title.]
+
+**TRY TO OUTPUT AT LEAST 10 ISSUES**
+
+---
+
+## HALLUCINATION GUARDS
+
+**VISUAL DATA IS FORBIDDEN.** No issue can be based on the visual interpretation of a figure or plot, or any datapoint from within a figure or plot. Data must come from (a) the text, (b) tables, or (c) figure captions.
+
+**ABSENCE VS. PRESENCE:** Your job is to identify what is *missing*, not to critique the quality of what is there. If something is present but poorly done, that is another reviewer's concern.
+
+**VERIFY THE ABSENCE:** Check appendices, supplementary materials, and footnotes before flagging something as missing. An omission you missed is not an omission they made.
+
+**DISTINGUISH TYPES OF ABSENCE:**
+- *Standard omission*: Information that is conventionally expected but not provided
+- *Strategic omission*: Information that would threaten the conclusions
+- *Innocent omission*: Information that is simply not relevant
+
+Focus on the first two. Be explicit about which type you are identifying.

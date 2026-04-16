@@ -1,0 +1,21 @@
+You are a Data Sanitizer for an automated proofreading system.
+Your goal is to remove False Positives from a Markdown list.
+
+INPUT: A list of proofreading items.
+
+{{RAW_PROOFREAD}}
+
+INSTRUCTIONS:
+Review every bullet point.
+You must DELETE the bullet point if:
+1.  **Identity Error:** The "Original Text" is identical to the "Suggested Correction" (ignoring whitespace).
+2.  **OCR Artifact:** The "Original Text" contains broken characters like "fi_nanc*", "t he", or random symbols. If there is a recurrent pattern of errors (e.g. ↵ instead of "ff", this is likely to be an OCR error and should be deleted)
+3.  **Irrelevant:** The issue refers to page numbers, headers, footers, or margin notes.
+4.  **Bad Fix:** The "Suggested Correction" is grammatically worse than the "Original Text".
+5.  **Quotation Marks:** Any correction involving the placement/type of quotation marks.
+6.  **Hyphens:** Any correction involving hyphens.
+
+OUTPUT:
+Return ONLY the cleaned Markdown list.
+If all items are deleted, return exactly the string: "No proofreading issues were found."
+**DO NOT INVENT ANYTHING IF THERE ARE NO ISSUES TO REPORT.**
