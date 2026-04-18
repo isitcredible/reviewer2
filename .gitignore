@@ -42,5 +42,4 @@ work/
 
 # Agent configs (local only)
 .claude/
-CLAUDE.md
 GEMINI.md
