@@ -38,6 +38,7 @@ def extract_equations_mathpix(pdf_path: str, page_ranges: str) -> str | None:
                         "rm_fonts": True,
                         "include_equation_tags": True,
                         "page_ranges": page_ranges,
+                        "metadata": {"improve_mathpix": False},
                     })
                 },
                 timeout=30,

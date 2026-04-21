@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "reviewer2"
-version = "1.0.1"
+version = "1.0.2"
 description = "Adversarial peer review pipeline for academic PDFs, powered by Google Gemini."
 readme = "README.md"
 requires-python = ">=3.10"

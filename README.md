@@ -14,7 +14,7 @@ Review*, explains the design and reports benchmark comparisons against five
 alternatives (15 wins, 4 ties, 1 loss across 20 pairings). It is in
 [`paper/yellatit.pdf`](paper/yellatit.pdf).
 
-**Version:** 1.0.1. The hosted service at isitcredible.com will continue to
+**Version:** 1.0.2. The hosted service at isitcredible.com will continue to
 evolve past this snapshot; breaking changes here will bump the major version
 per semver.
 
