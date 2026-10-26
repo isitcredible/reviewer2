@@ -53,6 +53,17 @@ PROOFREADER'S FINDINGS (main text only):
 - **ASYMPTOTIC ≠ EXACT.** The paper derives an asymptotic result (valid as $n \to \infty$) and then applies it to finite samples. Does it acknowledge the gap? If it silently treats $O(1/n)$ terms as zero for $n = 30$, that is worth flagging.
 - **UNIFORM vs POINTWISE.** The paper proves pointwise convergence but needs uniform convergence for its conclusion (e.g., to interchange limits with sup/inf, or for uniform consistency of an estimator). WHERE IS THE UNIFORMITY ARGUMENT?
 
+**7. CITED-RESULT MISUSE** — Authors invoke theorems whose hypotheses they never check. The framework collapses right there.
+- For EVERY external theorem, lemma, or known result the proof invokes ("by [Theorem/Author]", "it is well known that", "by standard results"): state its ACTUAL hypotheses, and CHECK that each one genuinely holds in this application. An invoked result whose hypotheses are not met is a FINDING.
+- Check the invoked result delivers the EXACT conclusion the proof uses — not a weaker or different one. Authors cite a theorem that gives X and use it as if it gave the stronger X′.
+- Check the proof is not silently using a CONVERSE or a stronger variant of the cited result that was never established.
+- If a cited result cannot be checked from the paper or your own knowledge, flag it as an UNVERIFIED dependency rather than assuming it holds.
+
+**8. ASSUMPTION STRESS TEST** — The foundations ARE the assumptions. Find the one that is missing.
+- For each stated assumption: WHERE is it used, and is it actually strong enough for every step that invokes it? A stated assumption that is INSUFFICIENT for a step relying on it is a finding.
+- Hunt for the MISSING assumption: a step that only works if some property holds — continuity, compactness, measurability, monotonicity, an interiority or boundedness condition — but that property is never assumed or proved. Unstated load-bearing assumptions are where theorems quietly fail.
+- **STRONGER-PROPERTY DRIFT.** An object is granted property P, but a later step silently uses a STRONGER property P′ of it (continuous used as Lipschitz, measurable used as integrable, convergent used as uniformly convergent, a limit assumed to exist and be finite). Trace each object's granted properties and CATCH the step that demands more than was given.
+
 ---
 
 ## WORKFLOW

@@ -81,7 +81,7 @@ INCORRECT (Title Case - fix these):
 Fix any structural deviations. **Do not make changes if there are no deviations.**
 
 ═══════════════════════════════════════════════════════════════
-TASK 3: IMPOSE FORMATTING RULES
+TASK 3B: IMPOSE FORMATTING RULES
 ═══════════════════════════════════════════════════════════════
 
 **Names and titles:**
@@ -196,6 +196,9 @@ Terms containing asterisks (like O*NET, C*-algebras) break bold formatting.
 - **Percents:**
   - *Rule:* Escape percent signs when used as a symbol. (Prefer writing "percent" as per Task 3, but if the symbol is necessary, escape it).
   - *Example:* Change `100%` to `100\%`.
+- **Backslashes (CRITICAL):**
+  - *Rule:* Literal backslashes in prose (typically from referenced code: Stata macros like `\y'`, regex like `\d+`, file paths like `C:\Users`) become LaTeX control sequences and BREAK the render. Paraphrase the snippet rather than passing the backslash through.
+  - *Example:* Change "uses `\y'` for the dependent variable" to "uses the local macro for the dependent variable".
 
 ═══════════════════════════════════════════════════════════════
 TASK 5: USE CORRECT TERMINOLOGY

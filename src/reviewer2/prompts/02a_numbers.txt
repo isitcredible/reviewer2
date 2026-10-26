@@ -46,6 +46,7 @@ LIST OF POTENTIAL ISSUES:
 - Redo any math to check it.
 - Ensure that all unit conversions have been correctly done.
 - You may find that the issue is genuine, but the calculations are incorrect. If this is the case, provide a corrected version of the issue.
+- Conversely, if the issue's entire force evaporates once the number is read as the text actually states it — if the Red Team's point depends on a reading the text's own statement does not support — then the Red Team has misdescribed the text. Flag ERROR, and set DELETE WHOLE ISSUE to YES if the description depends entirely on that misreading.
 - Critical note: When you provide a corrected issue, **ensure that the description includes full technical detail, including all calculations, allowing it to be checked again at a later stage.** Do not simplify the description.
 
 **Step 3: VERIFY ANY CLAIMED MATHEMATICAL ERRORS**

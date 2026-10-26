@@ -38,7 +38,7 @@ You should produce an honest defence for each issue.
 
 **TYPES OF ISSUE**
 
-There are seven different types of issue:
+There are eight different types of issue:
 
 **(Type A) Red Team mistake**
 - These are the issues where the Red Team's critique depends on a mistake in their description.
@@ -47,6 +47,7 @@ There are seven different types of issue:
 - **THE RED TEAM MUST NOT BE ALLOWED TO MAKE ANY MISTAKES.**
 - **THE RED TEAM MUST NOT BE ALLOWED TO MISREPRESENT THE TEXT.**
 - **Type A issues are the most important type of issue to flag.**
+- **The most damaging Type A is the cheap shot:** an attack that the text's own definitions, stated conditions, or wording deflect in a single line. Apply this test to every issue — *would it survive the author simply pointing at their own text?* If the paper's own apparatus dissolves the issue, the Red Team has attacked a claim the text does not make, and you must flag it.
 - **ANY** mistake in the Red Team's description must be called out.
 - In quantitative texts, any regression results must be correctly interpreted; e.g., look for these kinds of errors when **any** issue involves a regression:
     - Focusing on the reduced form rather than IV coefficient in a 2SLS regression.
@@ -64,6 +65,7 @@ There are seven different types of issue:
     - Methodological procedures
 - It is probable that the Red Team has hallucinated these factual attributes to suit its argument.
 - For mathematical claims (sign errors, wrong coefficients, incorrect derivations), check the Red Team's algebra carefully. If the Red Team has misquoted an equation or misidentified a variable's definition, flag it as Type A.
+- When you flag a mathematical claim as Type A, **show your own derivation in the defence**, tracing each symbol to how the paper itself defines it. A bare assertion that the Red Team is wrong, or that the result is "standard", is not a defence.
 - Flag any technical error. Specify whether the Red Team's critique depends on it **partly** or **entirely**.
 
 **(Type B) Acknowledged issues**
@@ -73,8 +75,9 @@ There are seven different types of issue:
 - Examples:
     - "We acknowledge that X is a limitation..."
     - "We address concern Y in the robustness checks..."
-- Be careful: **DO NOT CONFUSE TYPE A ISSUES WITH TYPE E ISSUES**, which are described below. **Just because you find a reference to something in the text, does not mean that the text itself recognizes it as an issue: it may be a feature rather than a bug.**
-- **STRICT RULE:
+- Be careful: **DO NOT CONFUSE TYPE B ISSUES WITH TYPE F ISSUES**, which are described below. **Just because you find a reference to something in the text, does not mean that the text itself recognizes it as an issue: it may be a feature rather than a bug.**
+- **STRICT RULE: An issue is only Type B if the text EXPLICITLY acknowledges it as a limitation or problem for its own argument. A passing mention, a definition, or a robustness check that does not name the concern is NOT an acknowledgement and does NOT make the issue Type B.**
+- **If the text instead RUNS A TEST that bears on the concern (a robustness check, placebo, alternative specification, alternative sample or control pool, or a formal statistical test), that is a Type H defence (below), NOT Type B. Type B is for verbal acknowledgement; Type H is for an empirical response.**
 
 **(Type C) Clerical errors**
 - Clerical errors are related to the presentation of information.
@@ -108,6 +111,16 @@ There are seven different types of issue:
 **(Type G) Other**
 - Any other type of issue.
 - **IF THERE IS NO PLAUSIBLE DEFENCE, CLASSIFY IT AS OTHER.**
+
+**(Type H) Empirically addressed**
+- The text runs a specific empirical test that bears on the concern: a robustness check, placebo, falsification test, alternative specification, alternative sample or control pool, or a formal statistical test (e.g. a test of equality of coefficients, a pre-trend / parallel-trends test, randomization or permutation inference, a sensitivity bound).
+- Unlike Type B, the text need **not** acknowledge the concern as a limitation. It is enough that it runs a test whose result speaks to the concern.
+- **YOU MUST ACTIVELY AND EXHAUSTIVELY SEARCH the identification and robustness sections and the ENTIRE appendix — every supplementary table and figure caption — for these tests.** First build an inventory: list every robustness exhibit the author ran (pre-trend or parallel-trends tests, alternative specifications, alternative samples or control pools, placebo or falsification tests, sensitivity or bounding analyses, formal equality or interaction tests, inference corrections, external validation). Then, for EACH red-team concern, work down that inventory and cite EVERY exhibit that bears on it. A strong author answers a threat with an affirmative robustness exhibit, not a verbal admission, and these are the defences most often MISSED. Do not stop at the first exhibit; a single concern is often addressed by several, and missing one the author actually ran is a serious defect in the defence.
+- For EVERY Type H defence you MUST give three things:
+    1. **TEST:** the specific exhibit, with the table or section label the author gives it.
+    2. **RESULT:** what the test shows, with the relevant numbers.
+    3. **MECHANISM LINK:** why this test bears on the SPECIFIC causal pathway the Red Team's concern names. State the link explicitly; do not leave it implied.
+- **Be honest about reach.** If the test addresses the concern only partially, or addresses a neighbouring threat rather than the exact one raised, SAY SO. A robustness check claimed to do more than it does invites a false dismissal at the next stage, which is worse than raising no defence at all.
 
 ═══════════════════════════════════════════════════════════════
 OUTPUT FORMAT

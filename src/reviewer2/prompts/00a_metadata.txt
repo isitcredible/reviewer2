@@ -40,13 +40,6 @@ CORRESPONDING_AUTHOR: [Corresponding author, if specified.]
 
 EMAIL: [Email address of corresponding author or all authors, if corresponding author is not specified.]
 
-PAGE_STRUCTURE: [Describe the page numbering system. Look at the printed page numbers in the document. Examples:
-- "Main text: 245-268"
-- "Main text: 245-268; Supplementary: S1-S45"
-- "Main text: 1-24; Appendix: A1-A15"
-- "Continuous: 1-50"
-If you cannot determine from the document, write "NULL"]
-
 SUPPLEMENT_START_PAGE: [The printed page number where supplementary materials begin. Look for where the main text ends and supplements/appendices begin. Examples:
 - "269" (if supplements continue numeric pagination)
 - "S1" (if supplements use S-numbering)

@@ -30,7 +30,20 @@ You reveal what actually happened in the sausage factory—and whether sausage w
 
 ---
 
-**LEVEL 2: IS IT CONTAMINATED MEAT**
+**LEVEL 2: WHAT CAME OUT OF THE GRINDER**
+*The estimand: what the estimator actually estimates*
+
+Standard errors, clustering and power are about *inference*: how precisely a parameter is pinned down. This asks something prior: what *is* the parameter? A regression coefficient is a weighted average of underlying effects, and the estimator, not the researcher, chooses the weights. Even with clean identification and correct standard errors, that average may not be the quantity the authors claim to have measured.
+
+- **The Weighted Average:** E.g.: What does the headline coefficient actually average, and with what weights? Are units, observations, or comparisons weighted equally, or by variance, exposure, timing, or frequency of observation? Could any of the implied weights be negative or perverse?
+- **Who Is in the Average:** E.g.: Which units contribute to the estimate, and does that set stay fixed across the groups, periods, or horizons being compared? If the composition shifts across the contrast, the result can reflect changing composition rather than the claimed effect.
+- **Heterogeneity:** E.g.: If the effect varies across units or over time, does the reported number still mean what the prose says? Is it the summary a reader would assume, or an artifact of how the estimator weights a heterogeneous set?
+
+Do not stop at "the standard errors are wrong." Ask whether the coefficient is the summary the prose implies, and what specification or diagnostic would distinguish the claimed effect from a weighting or composition artifact.
+
+---
+
+**LEVEL 3: IS IT CONTAMINATED MEAT**
 *Results integrity*
 
 - **Internal Consistency:** Do the numbers add up? Do tables match text? Do statistics match reported tests?
@@ -40,7 +53,7 @@ You reveal what actually happened in the sausage factory—and whether sausage w
 
 ---
 
-**LEVEL 3: CAN WE EVEN CALL IT A SAUSAGE**
+**LEVEL 4: CAN WE EVEN CALL IT A SAUSAGE**
 *Results-claim alignment*
 
 - **Headline vs. Tables:** Does the abstract claim what the results actually show?
@@ -51,7 +64,7 @@ You reveal what actually happened in the sausage factory—and whether sausage w
 
 ---
 
-**LEVEL 4: HOW MUCH MEAT IS ACTUALLY IN THE SAUSAGE**
+**LEVEL 5: HOW MUCH MEAT IS ACTUALLY IN THE SAUSAGE**
 *Practical significance*
 
 - **Effect Size in Real Terms:** What does this coefficient actually mean? Translate it into concrete, interpretable units.

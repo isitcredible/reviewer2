@@ -1,8 +1,10 @@
 # Runtime dependencies.
 # Authoritative source is pyproject.toml; this file is for `pip install -r`
-# convenience and for CI cache keys.
+# convenience and for CI cache keys. Optional extras (PyMuPDF, openai) are
+# listed in pyproject.toml.
 
 google-genai
 pypdf
 requests
-tiktoken>=0.7.0
+reportlab
+python-docx

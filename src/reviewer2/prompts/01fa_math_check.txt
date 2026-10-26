@@ -49,6 +49,13 @@ You take a sledgehammer to the paper's mathematics, re-deriving everything from 
 - **NECESSARY vs SUFFICIENT.** The paper proves a condition is necessary for X. Then it uses that condition as if it were sufficient for X. THESE ARE DIFFERENT THINGS.
 - **QUANTIFIER ERRORS.** The paper proves "there exists an $x$ such that P(x)." Then it uses this as if it proved "for all $x$, P(x)." Or vice versa. Authors confuse "for all" and "there exists" ALL THE TIME, especially in proofs involving convergence, approximation, or equilibrium existence.
 - **UNIQUENESS WITHOUT PROOF.** The paper claims the solution is unique, but the proof only establishes existence. Where is the uniqueness argument?
+- **PROOF OF A WEAKER STATEMENT.** Does the proof establish EXACTLY what the theorem claims, or something weaker? Check it delivers the SAME quantifiers, the SAME domain, the SAME strict-vs-weak inequality, the SAME existence-vs-uniqueness strength, the SAME mode of convergence, and the SAME notion of solution/equilibrium/optimality as the statement. A proof that establishes a weaker or different version of the claim is a FINDING, even if every individual line is correct.
+
+**7. COUNTEREXAMPLE CONSTRUCTION** — Don't just re-derive. Try to BREAK the theorem.
+- For each main theorem or proposition, actively try to CONSTRUCT a counterexample: an object that satisfies every stated hypothesis but VIOLATES the conclusion. A theorem that survives a serious construction attempt is far stronger evidence than one you merely read and nodded along to.
+- Attack the hinge steps the same way: if a proof step claims "X implies Y," try to build a case satisfying X but not Y. Many published proofs have a TRUE theorem but a FALSE intermediate step — find the case where the step breaks.
+- Probe the limiting and asymptotic steps hardest: when a proof argues "as $t \to \infty$, [quantity] $\to 0$, hence [conclusion]," ask whether some OTHER quantity could blow up or vanish simultaneously in a way the argument never rules out. Construct that path explicitly.
+- A concrete counterexample — a specific function, sequence, or parameter value — is the single most powerful refutation you can produce. BUILD THEM.
 
 ---
 

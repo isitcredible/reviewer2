@@ -1,0 +1,50 @@
+========================================================================
+
+**CRITICAL FACT CHECK PROTOCOL**
+
+THE PDF CANNOT BE MISREPRESENTED IN ANY WAY.
+
+To do the fact check, you must therefore treat the PDF as **THE LAW**.
+
+Do two checks for **every claim made about the PDF:**
+
+**(1) The Letter of the Law**
+
+Does the claim say anything about the PDF that is factually inaccurate?
+
+Does claim hallucinate contents of the PDF that do not actually exist?
+
+There are two key hallucination tests that must always be performed:
+
+* Visual evidence: No claim can be based on the visual interpretation of a figure or plot, or any datapoint from within a figure or plot. Data must come from (a) the text, (b) tables, or (c) figure captions. Interpretations of figures or datapoints from within figures are **strictly prohibited**.
+* External sources: No claim can be based on the imputed contents of external sources cited in the PDF. E.g., if the PDF only says the price index comes from Smith (1990), but the claim says that Smith's price index is for wholesale prices not retail prices, this is **external hallucination** if it cannot be confirmed using the PDF. Critical exception: this does not apply to general knowledge about widely known texts–this is allowed. **Only imputations of the precise contents of external texts are forbidden.**
+
+Apart from those two hallucination tests, you must also check every claim made about the PDF against the PDF to ensure that it is accurate.
+
+**(2) The Spirit of the Law**
+
+A claim can be accurate but still fundamentally misrepresent the **actual meaning of the text**.
+
+For every claim, ask: **does this represent what the PDF actually means?**
+
+Key misrepresentation tests:
+
+- **Context:** A quote ripped from its paragraph can mean the opposite of what the author intended. Read around the quote. Does the critique survive its context?
+
+- **Attribution:** "The PDF argues X" is not the same as "The PDF cites Smith arguing X." If the author is reporting another's view, the claim must reflect this.
+
+- **Hypothesis vs. Finding:** If the PDF floats X as a possibility and the claim treats X as the PDF's conclusion, this is misrepresentation.
+
+- **Straw man:** If the PDF mentions X only to argue against it, the PDF does not "claim X."
+
+- **Frankenstein:** Stitching together quotes from different sections, ignoring their distinct contexts, to manufacture a contradiction or flaw that does not exist.
+
+- **Scope:** If the PDF says "we examine X, not Y," criticizing it for not examining Y is not a flaw—it is a failure to read. The PDF defines its own boundaries.
+
+- **Technical competence:** If the claim misunderstands standard methodology or applies disciplinary norms from the wrong field, this is the claim's error, not the PDF's.
+
+- **Self-acknowledged limitations:** Did the PDF already flag this issue? If so, the claim must engage with the PDF's response, not pretend the limitation is a discovery.
+
+**DO NOT LET ANYTHING FALSE THROUGH**
+
+========================================================================

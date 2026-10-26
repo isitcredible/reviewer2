@@ -1,28 +1,32 @@
 # reviewer2
 
-Adversarial peer review for academic PDFs, powered by Google Gemini.
+Adversarial review of academic PDFs, powered by Google Gemini.
 
-`reviewer2` is the open-source pipeline behind the paid service at
-[isitcredible.com](https://isitcredible.com/). It produces a plain-text
-critical review of a PDF manuscript through a 30+ stage chain of LLM calls.
-The chain is built around one idea: aggressive prompting is what gets a
-language model to read a paper carefully, and a verification cascade is what
-removes the hallucinations aggression produces.
+`reviewer2` is the pipeline that ran the Reviewer 2 service at
+[isitcredible.com](https://isitcredible.com/), in the final form it took
+there. The hosted service has been retired; this repository is now the way to
+run it. It produces a plain-text critical review of a PDF manuscript through a
+chain of more than 30 LLM calls. The chain is built around one idea:
+aggressive prompting is what gets a language model to read a paper carefully,
+and a verification cascade is what removes the hallucinations aggression
+produces.
+
+It is best used by authors on their own work, before submission: a demanding
+first reader that finds what a hostile referee would. Its findings are leads
+to check, not verdicts.
 
 The accompanying paper, *Yell at It: Prompt Engineering for Automated Peer
-Review*, explains the design and reports benchmark comparisons against five
-alternatives (15 wins, 4 ties, 1 loss across 20 pairings). It is in
-[`paper/yellatit.pdf`](paper/yellatit.pdf).
+Review*, explains the design of version 1 and reports benchmark comparisons
+against five alternatives (15 wins, 4 ties, 1 loss across 20 pairings). It is
+in [`paper/yellatit.pdf`](paper/yellatit.pdf). Version 2 is described below
+and in the [changelog](CHANGELOG.md).
 
-**Version:** 1.0.2. The hosted service at isitcredible.com will continue to
-evolve past this snapshot; breaking changes here will bump the major version
-per semver.
+**Version:** 2.0.0.
 
 ## Requirements
 
 - Python 3.10+
 - A Google Gemini API key ([aistudio.google.com](https://aistudio.google.com/))
-- `qpdf` on `PATH`, for PDF preprocessing
 - (Optional) A Mathpix account, for the math-audit add-on
 
 ## Install
@@ -31,13 +35,30 @@ per semver.
 pip install git+https://github.com/isitcredible/reviewer2
 ```
 
+Two optional extras:
+
+```bash
+pip install "reviewer2[pdf] @ git+https://github.com/isitcredible/reviewer2"
+pip install "reviewer2[deepseek] @ git+https://github.com/isitcredible/reviewer2"
+```
+
+- `pdf` installs PyMuPDF, which shrinks PDFs larger than Gemini's 50 MB upload
+  limit (by dropping photographs, never text or tables) and gives a slightly
+  better page-number scan. PyMuPDF is licensed under the AGPL-3.0; without it
+  the pipeline uses pypdf and uploads large PDFs unchanged.
+- `deepseek` installs the client for the optional DeepSeek routing (see
+  Configuration).
+
 Or clone for development:
 
 ```bash
 git clone https://github.com/isitcredible/reviewer2
 cd reviewer2
-pip install -e .
+pip install -e ".[pdf,dev]"
+pytest
 ```
+
+The tests run the whole pipeline offline, with canned model responses.
 
 ## Quickstart
 
@@ -47,12 +68,11 @@ reviewer2 paper.pdf -o report.txt
 ```
 
 A default run takes 15 to 45 minutes and costs a few dollars in Gemini
-usage. It produces the core review plus the author-facing copyedit and
-editor's-note stages. The math and code audits are opt-in (see Add-ons).
+usage. It produces the core review, the reference check, and the
+author-facing editor's note and copyedit. The math and code audits are
+opt-in (see Add-ons).
 
 ## Input files
-
-Three kinds of input can be passed in.
 
 - **The main PDF.** The positional argument; always required.
 
@@ -70,144 +90,175 @@ Three kinds of input can be passed in.
   reviewer2 paper.pdf --supp appendix.pdf --supp online_appendix.pdf
   ```
 
-- **A replication-code directory.** Pass `--code-dir PATH` to enable the
-  code-audit add-on. Any text source files in the directory (R, Python,
-  Stata and so on) are compiled into a single PDF and attached behind the
-  paper for the code-audit stages.
+- **A replication package.** Pass `--code-dir PATH` to enable the
+  code-audit add-on. Code and text files (R, Python, Stata, MATLAB and so
+  on) and Word documents are compiled into one PDF with a map of the
+  package; PDFs in the package are attached as pages; data files and logs
+  are skipped; a copy of the paper itself inside the package is dropped.
 
   ```bash
   reviewer2 paper.pdf --code-dir ./replication/
   ```
 
-A volume circuit breaker halts the run if the combined page count of
-paper, supplements and compiled code exceeds 500 pages. Override with
-`--skip-size-check` when a legitimately large package needs to get
-through.
+- **A note to the reviewer.** `--note TEXT` or `--note-file PATH` adds an
+  instruction page in front of the paper: what to focus on, what has
+  changed since a previous draft, what the reader should know.
+
+The run stops if the paper, supplements and compiled package together
+exceed 1,000 pages. Override with `--skip-size-check`.
 
 ## What the report contains
-
-The default report has four sections:
 
 - **Is It Credible?** A short essay (up to 700 words) answering the
   titular question.
 - **The Bottom Line.** Three to five sentences on whether the paper's
   contributions hold.
-- **Potential Issues.** A verified, categorised list of the problems found
-  during review.
+- **Potential Issues.** A verified list of the problems found.
 - **Future Research.** Constructive proposals that follow from the
   critique.
-
-With the copyedit and editor's-note stages enabled (the default), the
-report also carries an author-facing editor's note with revision advice.
+- **Reference Check.** Every entry in the paper's bibliography looked up in
+  OpenAlex, Crossref and OpenLibrary, with a grounded web search for what
+  those cannot confirm. Entries that could not be confirmed are listed for
+  checking by hand; the section never asserts that a reference is
+  fabricated.
+- **Data Editor** (with `--code-dir`). A report on the replication package,
+  with each finding framed as something for the author to check.
+- **Editor's Note, Copyediting, Proofreading** (on by default). Advice to
+  the author on how to revise, specific revision suggestions, and language
+  errors.
 
 ## How it works
 
-The pipeline has three phases. Each stage is a prompt in `prompts/`; stage
-outputs are written as `.txt` files into a working directory and chained
-together, so a run can be resumed by pointing `--work-dir` at an existing
-folder.
+Each stage is a prompt in `src/reviewer2/prompts/`. Stage outputs are
+written as `.txt` files into a working directory, and independent stages
+run in parallel.
 
-### 1. Red Team: five adversarial agents
+### 0. Ingestion
+
+Metadata and the paper's claimed contributions are extracted. A page map
+records which printed page number each PDF page carries, built from the
+PDF's page labels and a text scan, corrected by a model that looks at the
+pages, and validated deterministically. Stages then cite printed page
+numbers, and a later guard rejects any citation correction that points
+outside the document. The reference check starts in the background.
+
+### 1. Red Team: adversarial agents
 
 Each agent attacks the paper from a different angle, prompted to find
 problems rather than verify the author's claims.
 
 - **The Breaker** targets intellectual foundations: whether the theoretical
   framework predetermines the findings, whether disputed premises are
-  treated as obvious, whether causal design labels (difference-in-differences,
-  instrumental variables) are earned rather than merely claimed.
+  treated as obvious, whether causal design labels are earned, and whether
+  the design recovers the parameter the conclusions invoke.
 - **The Butcher** dissects the empirical machinery: whether the method can
-  answer the question, whether measures capture the theoretical constructs,
-  whether robustness checks threaten anything, whether reported effect
-  sizes are large enough to matter.
+  answer the question, whether measures capture the constructs, whether
+  robustness checks threaten anything, whether effect sizes matter.
 - **The Shredder** audits procedural claims against documentation: whether
-  sample sizes cohere across methods, results and tables; whether blinding
-  and randomisation are described rather than asserted; whether
-  pre-registration claims match reported outcomes.
+  sample sizes cohere across methods, results and tables; whether
+  randomisation and pre-registration claims match what is reported.
 - **The Collector** returns to every location the Butcher and Shredder
-  flagged, reads within two pages for footnotes, table notes and
-  cross-references, and picks up what the attackers missed. It cannot raise
-  new issues.
+  flagged and picks up footnotes, table notes and cross-references they
+  missed. It cannot raise new issues.
 - **The Void** catalogues what the paper does not say: unmeasured
-  confounds, reverse causation, selection bias, alternative explanations
-  the authors never tested.
+  confounds, reverse causation, selection, untested alternatives.
 
-For non-empirical papers, the Butcher and Shredder are replaced by a second
-Breaker pass that probes theoretical and mathematical arguments more
-aggressively.
+For non-empirical papers, the Butcher and Shredder are replaced by two
+further Breaker rounds that probe theoretical and mathematical arguments.
 
-### 2. Filtering: Blue Team and verification
+The **math audit** (`--math`) runs alongside: a Re-Deriver, a Proofreader
+and an Auditor attack the mathematics; their findings are consolidated
+without judgment; a defence stage argues the paper's side and can run
+Python to check claims numerically; an assessment stage rules on each
+finding with the whole paper in view; and only findings it confirms are
+written up. Discarded means false, not minor: a real but small error stays.
 
-The Red Team produces both real findings and the sycophancy-driven
-hallucinations that aggressive prompting introduces. The rest of the
-pipeline exists to tell them apart.
+The **code audit** (`--code-dir`) also runs alongside: three agents hunt for
+divergences between paper and code, bugs, and data-handling problems; a
+grounding stage checks each finding against the package; then a
+deterministic check confirms that every quoted line of code exists in the
+file cited, moves it to the right file if it is elsewhere, and drops it if
+it is nowhere.
 
-- **The Blue Team** argues the paper's defence, presenting the strongest
-  possible counterargument for each Red Team finding.
-- **The Assessment** stage rules on each finding: Red Team correct, Blue
-  Team correct, or debatable. Mathematical claims are independently
-  re-derived before they pass.
+### 2. Filtering
+
+The Red Team produces both real findings and the hallucinations that
+aggressive prompting introduces. The rest of the pipeline tells them apart.
+
+- **Numbers** checks the Red Team's mathematical claims against the paper.
+- **The Blue Team** argues the paper's defence against every finding.
+- **The Assessment** rules on each: Red Team right, Blue Team right, or
+  debatable.
+- **List v1** checks quotations in context and removes false positives.
+- **Proportionality** demotes cheap shots an author could dismiss by
+  pointing at their own text, and deepens the issues the argument rests on.
+  **List v2** finalises the proportioned list.
+
+### 3. Checks and writing
+
 - **The Fact Checker** and **External Check** confirm page numbers,
-  quotations and equations against the PDF, and audit citations of outside
-  sources. Every external citation is assumed wrong until confirmed.
-- **Review Checker**, **Citation Verifier** and **Reviser** apply the same
-  discipline to the assembled review before it is finalised.
+  quotations and equations against the PDF, and audit claims about outside
+  sources.
+- **The Reviewer** writes the assessment from the verified list.
+- **Review Checker**, **Citation Verifier** and **Reviser** check the
+  assembled review against the PDF and correct it.
+- **The Legal pass** removes imputed intent, fraud accusations, competence
+  attacks and unsubstantiated absolutes. **The Formatter** cleans the
+  structure.
+- **Data Editor** writes the code-audit section.
+- *(On by default.)* **The Alchemist** advises the author how to revise
+  (with a **Math Advisor** routing each confirmed math error to its least
+  costly remedy); **The Polisher** rewrites the advice in an editorial
+  voice; **The Proofreader** and **Copy-Editor** produce language
+  corrections and revision suggestions.
 
-### 3. Writing: review and author-facing advice
+## Options
 
-- **The Reviewer** drafts the credibility assessment from the verified
-  issues list.
-- **The Legal pass** removes defamatory or legally risky phrasing: imputed
-  intent, fraud accusations, competence attacks, unsubstantiated
-  absolutes.
-- **The Formatter** cleans up structure and markdown.
-- *(Optional, on by default.)* **The Alchemist** advises the author how
-  to revise, with a defence plan and suggested caveats; **The Polisher**
-  rewrites it in an editorial voice; **The Proofreader** and
-  **Copy-Editor** produce specific revision suggestions and catch language
-  errors.
+| Flag                  | Default | What it does |
+|-----------------------|---------|--------------|
+| `--math`              | off     | Math audit (see above). Requires Mathpix credentials. |
+| `--code-dir PATH`     | off     | Replication-package audit (see above). |
+| `--no-references`     | (on)    | Skip the reference check. |
+| `--no-copyedit`       | (on)    | Skip the author-facing stages. |
+| `--no-editor-note`    | (on)    | Skip the author-facing stages. Copyedit and editor's note share inputs, so disabling either skips both. |
+| `--base`              | off     | Core review only: no math, code, copyedit or editor's note. |
+| `--note`, `--note-file` | none  | Instructions to the reviewer, added as a first page. |
+| `--work-dir PATH`     | temp    | Keep every stage output in `PATH`. |
+| `--start-stage N`     | 0       | Resume a run in `--work-dir` from stage `N` (e.g. `2.0`, `4.0`). |
+| `--stop-stage N`      | end     | Stop after the last stage numbered `N` or below (e.g. `2.9` stops after filtering). |
+| `--skip-size-check`   | off     | Allow more than 1,000 combined pages. |
 
-The appendix of the accompanying paper lists every stage in execution order
-with the Gemini model assigned to each.
-
-## Add-ons
-
-| Flag                 | Default | What it does                                                                                       | Extra cost |
-|----------------------|---------|----------------------------------------------------------------------------------------------------|------------|
-| `--math`             | off     | Math audit. Four stages re-derive key results, check text-to-equation consistency, audit the mathematical framework, and consolidate through an independent sober re-check on MathPix OCR text. Requires Mathpix OCR credentials. | Mathpix API + extra Gemini calls |
-| `--code-dir PATH`    | off     | Replication-code audit. Three agents examine the code (Divergence Hunter for claims-vs-code, Bug Hunter, Data Archaeologist), followed by a verification pass that tests each finding against the actual code. Pass a directory of source files to enable. | Several extra Gemini calls |
-| `--no-copyedit`      | (on)    | Skip the copyedit stages (proofreading and specific revision suggestions).                         | — |
-| `--no-editor-note`   | (on)    | Skip the editor's-note stage (the Alchemist's revision advice).                                    | — |
-| `--base`             | off     | Disable every add-on. Produces the core review only.                                               | Cheapest run |
-
-Copyedit and editor's note share inputs and are coupled in this release:
-disabling either skips both.
+To resume an interrupted run, rerun the same command with the same
+`--work-dir` and a `--start-stage` at or before the first stage that did not
+finish; earlier outputs are read back from disk. Stage numbers: 0
+ingestion, 1 Red Team and audits, 2 filtering, 3 checks, 4 reviewer, 5
+revision, 6 legal, 7 format, 8–9 author-facing stages.
 
 ## Configuration
 
-Environment variables:
-
-| Variable                | Required           | Purpose                                                                 |
-|-------------------------|--------------------|-------------------------------------------------------------------------|
-| `GEMINI_API_KEY`        | yes                | Google Gemini API key.                                                  |
-| `GEMINI_MODEL_OVERRIDE` | no                 | Force all stages to a specific model (e.g. `gemini-3.1-flash-lite-preview` for cheap smoke runs). |
-| `MATHPIX_APP_ID`        | only with `--math` | Mathpix app ID.                                                         |
-| `MATHPIX_APP_KEY`       | only with `--math` | Mathpix app key.                                                        |
+| Variable                   | Required           | Purpose |
+|----------------------------|--------------------|---------|
+| `GEMINI_API_KEY`           | yes                | Google Gemini API key. |
+| `MATHPIX_APP_ID`, `MATHPIX_APP_KEY` | only with `--math` | Mathpix credentials. |
+| `REVIEWER2_CONTACT_EMAIL`  | no                 | Your email, sent with OpenAlex and Crossref lookups so the reference check uses their faster "polite pool". |
+| `SEMANTIC_SCHOLAR_API_KEY` | no                 | Adds Semantic Scholar as a lookup source for the reference check (its keyless pool is too rate-limited to use). |
+| `DEEPSEEK_API_KEY`         | no                 | Route six clerical, text-only stages to DeepSeek V4 Flash, which is cheaper. Falls back to Gemini on any error. Needs the `deepseek` extra. |
+| `GEMINI_MODEL_OVERRIDE`    | no                 | Force every stage to one model (e.g. `flash_lite_3`) for cheap test runs. Review quality drops sharply. |
+| `REVIEWER2_PROMPTS_DIR`    | no                 | Load prompts from another directory, for experimenting. |
 
 ## Cost
 
-A default run costs a few dollars in Gemini API usage. `--math` and
-`--code-dir` each add a few more. `GEMINI_MODEL_OVERRIDE` lets you run the
-whole pipeline for well under a dollar as a smoke test, but smaller models
-significantly degrade review quality on the harder stages.
+A default run costs a few dollars in Gemini API usage; a per-stage cost
+breakdown is printed at the end. `--math` and `--code-dir` each add a few
+more. Model prices are in `src/reviewer2/data/pricing.csv`; update them if
+Google's change.
 
 ## License
 
 Apache License 2.0. See [LICENSE](LICENSE) and [NOTICE](NOTICE).
 
 The pipeline and prompts in this repository are the result of many months
-of empirical tuning by The Catalogue of Errors Ltd. Contributions that
-improve review quality on benchmark papers are welcome.
+of empirical tuning by The Catalogue of Errors Ltd.
 
 The names "Reviewer 2", "isitcredible.com", and "The Catalogue of Errors"
 are trademarks and are not licensed under Apache 2.0. Forks must use a

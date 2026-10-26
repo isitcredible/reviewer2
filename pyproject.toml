@@ -4,8 +4,8 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "reviewer2"
-version = "1.0.2"
-description = "Adversarial peer review pipeline for academic PDFs, powered by Google Gemini."
+version = "2.0.0"
+description = "Adversarial review of academic PDFs, powered by Google Gemini."
 readme = "README.md"
 requires-python = ">=3.10"
 license = {text = "Apache-2.0"}
@@ -28,10 +28,20 @@ dependencies = [
     "google-genai",
     "pypdf",
     "requests",
-    "tiktoken>=0.7.0",
+    "reportlab",
+    "python-docx",
 ]
 
 [project.optional-dependencies]
+# PyMuPDF is AGPL-3.0 licensed; it is optional. It shrinks PDFs over Gemini's
+# 50 MB upload limit and gives slightly better page-number scans.
+pdf = [
+    "PyMuPDF",
+    "pillow",
+]
+deepseek = [
+    "openai",
+]
 dev = [
     "pytest",
     "ruff",

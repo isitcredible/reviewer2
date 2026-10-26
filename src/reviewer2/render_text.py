@@ -80,11 +80,11 @@ def render_text(work_dir: str | Path) -> str:
         title=title,
         authors=authors,
         year=year,
-        citation=metadata.get("citation", ""),
-        url=metadata.get("url", ""),
-        abstract_summary=metadata.get("abstract_summary", ""),
-        key_methodology=metadata.get("key_methodology", ""),
-        research_question=metadata.get("research_question", ""),
+        citation=metadata.get("citation") or "",
+        url=metadata.get("url") or "",
+        abstract_summary=metadata.get("abstract_summary") or "",
+        key_methodology=metadata.get("key_methodology") or "",
+        research_question=metadata.get("research_question") or "",
         editor_note=editor_note,
         body=body,
         copyedit=copyedit,
@@ -155,6 +155,7 @@ _SECTION_HEADERS = [
     (re.compile(r"##\s*\**Data Editor\**\s*", re.IGNORECASE), "DATA EDITOR", ""),
     (re.compile(r"##\s*\**Potential Issues\**\s*", re.IGNORECASE), "POTENTIAL ISSUES", ""),
     (re.compile(r"##\s*\**Future Research\**\s*", re.IGNORECASE), "FUTURE RESEARCH", ""),
+    (re.compile(r"##\s*\**References\**\s*", re.IGNORECASE), "REFERENCES", ""),
 ]
 
 

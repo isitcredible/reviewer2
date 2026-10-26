@@ -127,7 +127,7 @@ When merges are performed on text identifiers (names, place names, industry code
 - What is the match rate after the merge? A lower-than-expected match rate — even if not flagged as an error — may indicate systematic non-matching on a non-random subset of observations.
 - Does the code verify that the merge achieves the expected match rate, or does it proceed silently regardless?
 
-**11. REPRODUCIBILITY**
+**13. REPRODUCIBILITY**
 
 - Do any operations produce **non-deterministic results** across runs? For example:
   - Sort operations on data with **ties** in the sort key produce arbitrary orderings, and any subsequent row-indexing will be unstable.

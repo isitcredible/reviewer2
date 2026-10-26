@@ -26,3 +26,14 @@ def pricing_csv() -> Path:
     if override:
         return Path(override)
     return _PACKAGE_DIR / "data" / "pricing.csv"
+
+
+def prompt_path(relative: str | os.PathLike) -> Path:
+    """Resolve a prompt or resource path inside the prompts directory.
+
+    Accepts either ``"04a_reviewer.txt"`` or the ``"prompts/04a_reviewer.txt"``
+    form the stage code uses."""
+    rel = str(relative).replace(os.sep, "/")
+    if rel.startswith("prompts/"):
+        rel = rel[len("prompts/"):]
+    return prompts_dir() / rel

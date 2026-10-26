@@ -17,21 +17,18 @@ This software depends on the following third-party packages at runtime. Their
 licenses apply to their respective source code and are not altered by this
 project's license.
 
-  google-genai
-    Apache License 2.0
-    https://github.com/googleapis/python-genai
+  google-genai          Apache License 2.0   https://github.com/googleapis/python-genai
+  requests              Apache License 2.0   https://github.com/psf/requests
+  pypdf                 BSD 3-Clause         https://github.com/py-pdf/pypdf
+  reportlab             BSD License          https://www.reportlab.com/
+  python-docx           MIT License          https://github.com/python-openxml/python-docx
 
-  requests
-    Apache License 2.0
-    https://github.com/psf/requests
+Optional dependencies (installed only with the named extra):
 
-  pypdf
-    BSD 3-Clause
-    https://github.com/py-pdf/pypdf
+  PyMuPDF  [pdf]        GNU AGPL-3.0         https://github.com/pymupdf/PyMuPDF
+  Pillow   [pdf]        MIT-CMU (HPND)       https://github.com/python-pillow/Pillow
+  openai   [deepseek]   Apache License 2.0   https://github.com/openai/openai-python
 
-  tiktoken
-    MIT License
-    https://github.com/openai/tiktoken
-
-Additional dependency attributions will be added as the dependency set
-settles during initial release.
+PyMuPDF is licensed under the GNU Affero General Public License v3.0 (or a
+commercial licence from Artifex). It is not required; if you install it,
+its licence terms apply to your use of it.

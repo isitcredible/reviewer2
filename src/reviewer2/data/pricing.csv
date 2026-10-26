@@ -6,3 +6,6 @@ gemini-3.1-flash-lite-preview,0.25,1.5,0.25,1.5,0
 gemini-2.5-pro,1.25,10,2.5,15,200000
 gemini-3-pro-preview,2,12,4,18,200000
 gemini-3.1-pro-preview,2,12,4,18,200000
+deepseek-v4-flash,0.14,0.28,0.14,0.28,0
+deepseek-v4-pro,1.74,3.48,1.74,3.48,0
+mathpix_pdf_page,5000,0,5000,0,0

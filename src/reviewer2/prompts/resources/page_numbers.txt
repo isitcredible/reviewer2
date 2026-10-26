@@ -1,0 +1,15 @@
+## PAGE NUMBER REFERENCE
+
+**PDF Structure:**
+{{PAGE_STRUCTURE_DETAILS}}
+
+**CRITICAL RULES FOR PAGE CITATIONS:**
+1. ALWAYS cite the PRINTED page numbers visible in the document
+   - Main text: Use numeric pages (e.g., "p. 247", "pp. 250-252")
+   - Supplements: Use the printed format (e.g., "p. S12", "p. A-5")
+
+2. NEVER cite PDF viewer page numbers
+   - Wrong: "PDF page 35" or "on page 35 of the PDF"
+   - Right: "p. 247" or "p. S12"
+
+3. **Use the Table of Contents after the Citation to orient yourself**

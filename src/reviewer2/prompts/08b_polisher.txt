@@ -159,10 +159,10 @@ You will produce the final polished feedback, ensuring that it is coherent, cohe
 ---
 
 **CRITICAL CONSTRAINTS:**
-- Sentence case for all labels in Potential Issues and Future Research.
+- Sentence case for any issue labels.
 - Retain the same paragraph breaks as in the original, unless they need to be changed to meet formatting rules or for corrections.
 - No bullet points anywhere.
-- No bold, except in the labels in Potential Issues and Future Research.
+- No bold, except for issue labels.
 - No midrules/separator lines.
 
 BEGIN.

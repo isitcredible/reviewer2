@@ -41,8 +41,21 @@ def build_parser() -> argparse.ArgumentParser:
              "either skips all Writer-Mode stages.",
     )
     parser.add_argument(
+        "--no-references", action="store_true",
+        help="Skip the reference check (bibliography lookups against OpenAlex, "
+             "Crossref and OpenLibrary, plus a grounded web search).",
+    )
+    parser.add_argument(
         "--base", action="store_true",
         help="Base review only. Disables every add-on: math, code, copyedit, editor's note.",
+    )
+    parser.add_argument(
+        "--note", default="", metavar="TEXT",
+        help="Instructions to the reviewer, prepended to the paper as an extra first page.",
+    )
+    parser.add_argument(
+        "--note-file", default=None, metavar="PATH",
+        help="Read the reviewer note from a text file.",
     )
     parser.add_argument(
         "--supp", action="append", default=[], metavar="PDF",
@@ -64,8 +77,17 @@ def build_parser() -> argparse.ArgumentParser:
         help="Keep the intermediate stage outputs after the run completes.",
     )
     parser.add_argument(
+        "--start-stage", type=float, default=0.0, metavar="N",
+        help="Resume from stage N in an existing --work-dir (e.g. 2.0). Earlier "
+             "stages are read back from disk. Default: 0 (fresh run).",
+    )
+    parser.add_argument(
+        "--stop-stage", type=float, default=100.0, metavar="N",
+        help="Stop after the last stage numbered N or below (e.g. 2.9 stops after stage 2). Default: run to the end.",
+    )
+    parser.add_argument(
         "--skip-size-check", action="store_true",
-        help="Bypass the 500-page combined-volume circuit breaker.",
+        help="Bypass the 1000-page combined-volume limit.",
     )
     return parser
 
@@ -98,6 +120,12 @@ def main(argv: list[str] | None = None) -> int:
         return 2
 
     _require_env("GEMINI_API_KEY", "for Gemini API access")
+    note = args.note
+    if args.note_file:
+        note = Path(args.note_file).expanduser().read_text(encoding="utf-8")
+    if args.start_stage > 0 and not args.work_dir:
+        print("error: --start-stage needs the --work-dir of the run being resumed.", file=sys.stderr)
+        return 2
     addons = resolve_addons(args)
     if addons["math"]:
         _require_env("MATHPIX_APP_ID", "for the --math add-on")
@@ -126,7 +154,11 @@ def main(argv: list[str] | None = None) -> int:
             editor_note=addons["editor_note"],
             supp_pdfs=args.supp or None,
             code_dir=args.code_dir,
+            references=not args.no_references,
+            note=note,
             citation=args.citation,
+            start_stage=args.start_stage,
+            stop_stage=args.stop_stage,
             skip_size_check=args.skip_size_check,
         )
     except PipelineError as e:
@@ -136,6 +168,9 @@ def main(argv: list[str] | None = None) -> int:
         print("\naborted by user", file=sys.stderr)
         return 130
 
+    if args.stop_stage < 100.0 and not (final_txt and Path(final_txt).is_file()):
+        print(f"\n  stopped after stage {args.stop_stage}; outputs are in {work_dir}")
+        return 0
     if final_txt and Path(final_txt).is_file():
         shutil.copy2(final_txt, output_path)
         print(f"\n✓ Report written to {output_path}")
